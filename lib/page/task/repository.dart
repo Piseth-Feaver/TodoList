@@ -3,7 +3,7 @@ import 'model.dart';
 
 class CreateTaskRepository extends BaseRepository{
   Future<CreateTaskResponse?> createTask(CreateTaskRequest request) async {
-    final response = await post('/createTask', request.toJson());
+    final response = await post('/create/task', request.toJson());
     final data = await checkError(response);
     return CreateTaskResponse.fromJson(data!);
   }

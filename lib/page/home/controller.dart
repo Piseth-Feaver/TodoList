@@ -6,6 +6,7 @@ class HomeController extends GetxController {
   final item = RxList<TodayTask>();
   final repo = Get.find<TodayTaskRepository>();
 
+
   @override
   void onInit()  {
     fetchTodayTasks();
@@ -15,6 +16,7 @@ class HomeController extends GetxController {
     final tasks = await repo.getTodayTask();
     if (tasks != null) {
       item.assignAll(tasks);
+      await fetchTodayTasks();
     }
   }
 }

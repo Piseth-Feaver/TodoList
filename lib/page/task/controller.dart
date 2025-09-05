@@ -44,7 +44,7 @@ class TaskController extends GetxController {
     final result = await repo.createTask(request);
     if (result == null) return;
     item.value = request;
-    Get.back(result: result);
+    Get.back(result: true);
   }
   bool isSelectedDay(DateTime day) {
     return isSameDay(selectedDate.value, day);

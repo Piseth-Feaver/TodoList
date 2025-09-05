@@ -35,7 +35,7 @@ class HomeView extends GetView<HomeController> {
                       ),
                     ),
                   ),
-            
+
                   SizedBox(height: kPadding),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -82,7 +82,8 @@ class HomeView extends GetView<HomeController> {
                     }
                     return ListView.separated(
                       shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(), // important inside Column/ListView
+                      physics:
+                          NeverScrollableScrollPhysics(), // important inside Column/ListView
                       itemBuilder: (_, index) {
                         final i = items[index];
                         return GestureDetector(

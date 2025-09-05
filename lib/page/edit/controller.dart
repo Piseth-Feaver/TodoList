@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:todo_list/page/edit/repository.dart';
+import 'model.dart';
 
 class EditController extends GetxController {
   final selectedDate = DateTime.now().obs;
@@ -8,10 +10,19 @@ class EditController extends GetxController {
   final calendarFormat = CalendarFormat.month.obs;
   var startTime = TimeOfDay.now().obs;
   var endTime = TimeOfDay.now().obs;
+  final item = Rxn<EditRequest>();
+  final repo = Get.find<EditRepository>();
 
   @override
   void onInit() {
+    fetchDetail(Get.arguments);
     super.onInit();
+  }
+  Future<void> fetchDetail(int id) async {
+    final tasks = await repo.getFeedBack(id);
+    if (tasks != null) {
+      item.value = tasks;
+    }
   }
   bool isSelectedDay(DateTime day) {
     return isSameDay(selectedDate.value, day);

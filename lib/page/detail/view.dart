@@ -115,7 +115,9 @@ class DetailView extends GetView<DetailController> {
                 }),
                 AppButton(
                   onPressed: () {
-                    Get.toNamed(HomeRoute.edit);
+                    final items = controller.item.value;
+                    if (items == null) return;
+                    Get.toNamed(HomeRoute.edit, arguments: items.id);
                   },
                   child: Text(
                     "Edit Task",
