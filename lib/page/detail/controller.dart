@@ -33,7 +33,7 @@ class DetailController extends GetxController {
 
   void onDaySelected(DateTime selectedDay, DateTime focusedDay) {
     selectedDate.value = selectedDay;
-    focusedDate.value = focusedDay;
+
   }
 
   void onFormatChanged(CalendarFormat format) {

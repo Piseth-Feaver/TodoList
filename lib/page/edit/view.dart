@@ -79,9 +79,7 @@ class EditView extends GetView<EditController> {
                     ],
                   ),
                   AppButton(
-                    onPressed: () => controller.onUpdate(
-                        Get.arguments,
-                    ),
+                    onPressed: () => controller.onUpdate(Get.arguments),
                     child: const Text(
                       "Update Task",
                       style: TextStyle(color: Colors.white),

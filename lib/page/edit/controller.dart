@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:todo_list/export.dart';
 import 'package:todo_list/page/edit/repository.dart';
 import 'model.dart';
 
 final DateFormat dateFormat = DateFormat("yyyy-MM-dd");
-final DateFormat timeFormat = DateFormat("HH:mm a");
+final DateFormat timeFormat = DateFormat("HH:mm:ss");
 
 class EditController extends GetxController {
   final nameController = TextEditingController();
@@ -14,6 +15,7 @@ class EditController extends GetxController {
   final startTime = TimeOfDay.now().obs;
   final endTime = TimeOfDay.now().obs;
   final repo = Get.find<EditRepository>();
+
 
   @override
   void onInit() {
@@ -47,6 +49,7 @@ class EditController extends GetxController {
     );
     final result = await repo.editTask(request, id);
     Get.back(result: true);
+    Get.offAllNamed(HomeRoute.home);
   }
 
   Future<void> pickStartTime(BuildContext context) async {
