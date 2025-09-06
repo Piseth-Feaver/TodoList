@@ -8,4 +8,9 @@ class DetailRepository extends BaseRepository {
     if (data == null) return null;
     return DetailRequest.fromJson(data);
   }
+  Future<bool>deleteTask(int id) async {
+    final response = await delete('/delete/task/$id');
+    final data = checkError(response);
+    return true;
+  }
 }

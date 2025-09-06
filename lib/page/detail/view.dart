@@ -122,12 +122,25 @@ class DetailView extends GetView<DetailController> {
                   ),
                 ),
                 AppButton(
-                  onPressed: () {},
-                  child: Text(
+                  onPressed: () {
+                    Get.defaultDialog(
+                      title: "Confirm Delete",
+                      middleText: "Are you sure you want to delete this task?",
+                      textCancel: "Cancel",
+                      textConfirm: "Confirm",
+                      confirmTextColor: Colors.white,
+                      onConfirm: () async {
+                        await controller.onConfirm();
+                        Get.back();
+                      },
+                    );
+                  },
+                  child: const Text(
                     "Delete Task",
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
+
               ],
             ),
           ),

@@ -14,7 +14,7 @@ class BaseRepository extends GetConnect {
 
   @override
   void onInit() {
-    httpClient.baseUrl = "http://192.168.0.236:5000";
+    httpClient.baseUrl = "http://172.20.10.6:5000";
     httpClient.timeout = const Duration(minutes: 2);
     httpClient.addRequestModifier<dynamic>((request) {
       request.headers['Authorization'] = 'Bearer ${storage.token}';
