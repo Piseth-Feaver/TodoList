@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:todo_list/core/device.dart';
 import 'package:todo_list/core/export.dart';
 import 'export.dart';
 import 'repository.dart';

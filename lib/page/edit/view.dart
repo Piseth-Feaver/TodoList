@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:todo_list/export.dart';
 import '../../core/time.dart';
-import 'export.dart';
 
 class EditView extends GetView<EditController> {
   const EditView({super.key});

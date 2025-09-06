@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:todo_list/export.dart';
 import 'package:todo_list/page/edit/repository.dart';
-import 'model.dart';
 
 final DateFormat dateFormat = DateFormat("yyyy-MM-dd");
 final DateFormat timeFormat = DateFormat("HH:mm:ss");

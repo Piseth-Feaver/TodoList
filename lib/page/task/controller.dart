@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:todo_list/export.dart';
 import 'package:todo_list/helper/alert.dart';
-import 'model.dart';
 import 'repository.dart';
 
 class TaskController extends GetxController {
@@ -45,6 +45,7 @@ class TaskController extends GetxController {
     final result = await repo.createTask(request);
     if (result != null) {
       AlertHelper.success("Create permission successfully");
+      Get.offAllNamed(HomeRoute.home);
       Get.back(result: true);
     } else {
       AlertHelper.error("Create permission failed");

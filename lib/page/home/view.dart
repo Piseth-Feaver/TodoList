@@ -18,7 +18,22 @@ class HomeView extends GetView<HomeController> {
           Get.focusScope?.unfocus();
         },
         child: Scaffold(
-          appBar: AppBar(title: const Text('Welcome Lonh Piseth')),
+          appBar: AppBar(
+            title: RichText(
+              overflow: TextOverflow.ellipsis,
+              text: TextSpan(
+                children: [
+                  TextSpan(
+                    text: "Welcome, ",
+                    style: Get.textTheme.titleLarge,
+                  ),
+                  TextSpan(
+                    text: controller.username,
+                  ),
+                ],
+              ),
+            ),
+          ),
           body: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.only(left: kPadding, right: kPadding),
@@ -35,7 +50,6 @@ class HomeView extends GetView<HomeController> {
                       ),
                     ),
                   ),
-
                   SizedBox(height: kPadding),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -94,7 +108,6 @@ class HomeView extends GetView<HomeController> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(i.name, style: TextStyle(fontSize: 16)),
-                                const SizedBox(height: 6),
                                 Row(
                                   children: [
                                     const Icon(Icons.calendar_today, size: 16),
@@ -106,7 +119,7 @@ class HomeView extends GetView<HomeController> {
                                     Text(formatEndTime(i.endTime)),
                                   ],
                                 ),
-                                const SizedBox(height: kSpace),
+                                // const SizedBox(height: kSpace),
                                 Text("Status: ${i.status}"),
                               ],
                             ),

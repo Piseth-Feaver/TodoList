@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:todo_list/background.dart';
-import 'package:todo_list/core/export.dart';
 import 'package:todo_list/export.dart';
-import 'package:todo_list/helper/card.dart';
-import 'export.dart';
 
 class TaskView extends GetView<TaskController> {
   const TaskView({super.key});

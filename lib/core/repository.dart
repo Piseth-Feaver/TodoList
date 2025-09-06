@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:todo_list/core/storage.dart';
-import 'device.dart';
 import 'export.dart';
 
 class BaseRepository extends GetConnect {

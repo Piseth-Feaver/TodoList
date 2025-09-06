@@ -1,6 +1,4 @@
 import 'package:get/get.dart';
-import 'package:todo_list/page/home/binding.dart';
-import 'package:todo_list/page/home/view.dart';
 import '../page/detail/view.dart';
 import '../page/export.dart';
 

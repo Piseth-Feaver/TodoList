@@ -56,9 +56,7 @@ class SignInView extends GetView<SignInController> {
                                   controller: controller.passwordController,
                                 ),
                                 AppButton(
-                                  onPressed: () {
-                                    Get.toNamed(HomeRoute.home);
-                                  },
+                                  onPressed: ()=> controller.signIn(),
                                   child: Text("Sign In", style: TextStyle(color: Colors.white),),
                                 ),
                               ],
