@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:todo_list/export.dart';
+import '../../core/time.dart';
 import 'export.dart';
 
 class EditView extends GetView<EditController> {
@@ -10,14 +11,12 @@ class EditView extends GetView<EditController> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Get.focusScope?.unfocus();
-      },
+      onTap: () => Get.focusScope?.unfocus(),
       child: AppBackground(
         child: Scaffold(
           appBar: AppBar(title: const Text('Edit Task')),
           body: Padding(
-            padding: const EdgeInsets.only(left: kPadding, right: kPadding),
+            padding: const EdgeInsets.symmetric(horizontal: kPadding),
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -26,91 +25,68 @@ class EditView extends GetView<EditController> {
                     () => TableCalendar(
                       firstDay: DateTime.utc(2020, 1, 1),
                       lastDay: DateTime.utc(2030, 12, 31),
-                      focusedDay: controller.focusedDate.value,
-                      calendarFormat: controller.calendarFormat.value,
-                      selectedDayPredicate: (day) => controller.isSelectedDay(day),
-                      onDaySelected: controller.onDaySelected,
-                      onFormatChanged: controller.onFormatChanged,
+                      focusedDay: controller.selectedDate.value,
+                      selectedDayPredicate:
+                          (day) =>
+                              isSameDay(day, controller.selectedDate.value),
+                      onDaySelected: (selectedDay, focusedDay) {
+                        controller.selectedDate.value = selectedDay;
+                      },
                     ),
                   ),
-                  SizedBox(height: kSpace),
-                  Text("Schedule", style: TextStyle(fontSize: 18)),
-                  Obx(() {
-                    final result = controller.item.value;
-                    if (result == null) return SizedBox();
-                    return Column(
-                      children: [
-                        TextFormField(
-                          initialValue: result.name,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
+                  const SizedBox(height: kSpace),
+                  const Text("Schedule", style: TextStyle(fontSize: 18)),
+
+                  TextFormField(
+                    controller: controller.nameController,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: kSpace),
+                  TextFormField(
+                    controller: controller.descriptionController,
+                    maxLines: 3,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Obx(
+                          () => AppTimePicker(
+                            label: "Start Time",
+                            time: controller.startTime.value,
+                            onTap: () => controller.pickStartTime(context),
                           ),
                         ),
-                        SizedBox(height: kSpace),
-                        TextFormField(
-                          initialValue: result.description,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
+                      ),
+                      const SizedBox(width: kSpace),
+                      Expanded(
+                        child: Obx(
+                          () => AppTimePicker(
+                            label: "End Time",
+                            time: controller.endTime.value,
+                            onTap: () => controller.pickEndTime(context),
                           ),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Start Time", style: TextStyle(fontSize: 16),),
-                                Row(
-                                  children: [
-                                    AppCard(
-                                      left: IconButton(
-                                        onPressed: () {
-                                          controller.pickStartTime(context);
-                                        },
-                                        icon: Icon(Icons.access_time_outlined),
-                                      ),
-                                      right: Text(
-                                        formatStartTime(result.startTime),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("End Time",style: TextStyle(fontSize: 16),),
-                                Row(
-                                  children: [
-                                    AppCard(
-                                      left: IconButton(
-                                        onPressed: () {
-                                          controller.pickEndTime(context);
-                                        },
-                                        icon: Icon(Icons.access_time_outlined),
-                                      ),
-                                      right: Text(
-                                        formatEndTime(result.endTime),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
-                    );
-                  }),
+                      ),
+                    ],
+                  ),
                   AppButton(
-                    onPressed: (){},
-                    child: Text("Update Task",style: TextStyle(color: Colors.white),),
-                  )
+                    onPressed: () => controller.onUpdate(
+                        Get.arguments,
+                    ),
+                    child: const Text(
+                      "Update Task",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
                 ],
               ),
             ),

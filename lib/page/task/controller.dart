@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:todo_list/helper/alert.dart';
 import 'model.dart';
 import 'repository.dart';
 
@@ -14,7 +15,7 @@ class TaskController extends GetxController {
   var startTime = TimeOfDay.now().obs;
   var endTime = TimeOfDay.now().obs;
   final repo = Get.find<CreateTaskRepository>();
-  final item = Rxn<CreateTaskRequest>();
+
 
   Future<void> createTask() async {
     if (formKey.currentState == null || !formKey.currentState!.validate()) {
@@ -33,17 +34,21 @@ class TaskController extends GetxController {
         startTime.value.minute,
       ),
       endTime: DateTime(
-        selectedDate.value.year,
-        selectedDate.value.month,
-        selectedDate.value.day,
-        endTime.value.hour,
-        endTime.value.minute,
-      ),
+      selectedDate.value.year,
+      selectedDate.value.month,
+      selectedDate.value.day,
+      endTime.value.hour,
+      endTime.value.minute,
+    ),
       userId: 1,
     );
     final result = await repo.createTask(request);
-    if (result == null) return;
-    item.value = request;
+    if (result != null) {
+      AlertHelper.success("Create permission successfully");
+      Get.back(result: true);
+    } else {
+      AlertHelper.error("Create permission failed");
+    }
     Get.back(result: true);
   }
   bool isSelectedDay(DateTime day) {

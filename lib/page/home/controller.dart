@@ -16,7 +16,6 @@ class HomeController extends GetxController {
     final tasks = await repo.getTodayTask();
     if (tasks != null) {
       item.assignAll(tasks);
-      await fetchTodayTasks();
     }
   }
 }

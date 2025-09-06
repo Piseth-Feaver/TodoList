@@ -82,13 +82,12 @@ class HomeView extends GetView<HomeController> {
                     }
                     return ListView.separated(
                       shrinkWrap: true,
-                      physics:
-                          NeverScrollableScrollPhysics(), // important inside Column/ListView
                       itemBuilder: (_, index) {
                         final i = items[index];
                         return GestureDetector(
-                          onTap: () {
-                            Get.toNamed(HomeRoute.detail, arguments: i.id);
+                          onTap: () async {
+                            await Get.toNamed(HomeRoute.detail, arguments: i.id,);
+                            controller.fetchTodayTasks();
                           },
                           child: AppCard(
                             left: Column(
@@ -124,8 +123,9 @@ class HomeView extends GetView<HomeController> {
           ),
           floatingActionButton: FloatingActionButton(
             backgroundColor: buttonColor,
-            onPressed: () {
-              Get.toNamed(HomeRoute.task);
+            onPressed: () async {
+                await Get.toNamed(HomeRoute.task);
+                controller.fetchTodayTasks();
             },
             child: Icon(Icons.add, color: Colors.white),
           ),

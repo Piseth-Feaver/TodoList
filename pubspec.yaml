@@ -28,6 +28,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  intl: ^0.20.0
   loader_overlay: ^4.0.0
   device_info_plus: ^11.0.0
   toastification: ^2.0.0

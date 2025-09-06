@@ -3,12 +3,14 @@ class DetailRequest{
   final String name;
   final String description;
   final String startTime;
+  final String date;
   final String endTime;
   final String status;
   DetailRequest({
     required this.id,
     required this.name,
     required this.description,
+    required this.date,
     required this.startTime,
     required this.endTime,
     required this.status,
@@ -17,6 +19,7 @@ class DetailRequest{
     return DetailRequest(
       id: json['id'],
       name: json['name'],
+      date: json['date'],
       description: json['description'],
       startTime: json['startTime'],
       endTime: json['endTime'],

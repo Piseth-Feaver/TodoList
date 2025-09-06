@@ -25,18 +25,15 @@ class DetailView extends GetView<DetailController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Obx(
-                  () => TableCalendar(
-                    firstDay: DateTime.utc(2020, 1, 1),
-                    lastDay: DateTime.utc(2030, 12, 31),
-                    focusedDay: controller.focusedDate.value,
-                    calendarFormat: controller.calendarFormat.value,
-                    selectedDayPredicate:
-                        (day) => controller.isSelectedDay(day),
-                    onDaySelected: controller.onDaySelected,
-                    onFormatChanged: controller.onFormatChanged,
-                  ),
-                ),
+                Obx(() => TableCalendar(
+                  firstDay: DateTime.utc(2020, 1, 1),
+                  lastDay: DateTime.utc(2030, 12, 31),
+                  focusedDay: controller.selectedDate.value,
+                  selectedDayPredicate: (day) => isSameDay(day, controller.selectedDate.value),
+                  onDaySelected: (selectedDay, focusedDay) {
+                    controller.selectedDate.value = selectedDay;
+                  },
+                )),
                 SizedBox(height: kSpace),
                 Obx(() {
                   final items = controller.item.value;

@@ -8,6 +8,8 @@ class DetailController extends GetxController {
   final selectedDate = DateTime.now().obs;
   final focusedDate = DateTime.now().obs;
   final calendarFormat = CalendarFormat.month.obs;
+  final nameController = TextEditingController();
+  final descriptionController = TextEditingController();
   var startTime = TimeOfDay.now().obs;
   var endTime = TimeOfDay.now().obs;
   final item = Rxn<DetailRequest>();
@@ -21,6 +23,7 @@ class DetailController extends GetxController {
   Future<void> fetchDetail(int id) async {
     final tasks = await repo.getFeedBack(id);
     if (tasks != null) {
+      selectedDate.value = DateTime.parse(tasks.date);
       item.value = tasks;
     }
   }
