@@ -47,6 +47,7 @@ class EditController extends GetxController {
       ),
     );
     final result = await repo.editTask(request, id);
+    if (result == null) return;
     Get.back(result: true);
     Get.offAllNamed(HomeRoute.home);
   }

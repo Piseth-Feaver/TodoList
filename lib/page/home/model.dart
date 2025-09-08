@@ -1,3 +1,5 @@
+import 'package:get/get.dart';
+
 class TodayTask {
   final int id ;
   final String name;
@@ -5,7 +7,7 @@ class TodayTask {
   final String description;
   final String startTime;
   final String endTime;
-  final String status;
+  String status = "pending";
 
   TodayTask({
     required this.id,
@@ -15,6 +17,7 @@ class TodayTask {
     required this.startTime,
     required this.status,
     required this.endTime,
+
   });
   factory TodayTask.fromJson(Map<String, dynamic> json) {
     return TodayTask(
@@ -25,6 +28,27 @@ class TodayTask {
       startTime: json['startTime'],
       status: json['status'],
       endTime:json['endTime'],
+    );
+  }
+}
+
+class UpdateStatus{
+  final int id;
+  final String status;
+  UpdateStatus({
+    required this.id,
+    required this.status,
+  });
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'status': status,
+    };
+  }
+  factory UpdateStatus.fromJson(Map<String, dynamic> json) {
+    return UpdateStatus(
+      id: json['id'],
+      status: json['status'],
     );
   }
 }

@@ -44,11 +44,11 @@ class TaskController extends GetxController {
     );
     final result = await repo.createTask(request);
     if (result != null) {
-      AlertHelper.success("Create permission successfully");
+      AlertHelper.success("Create task successfully");
       Get.offAllNamed(HomeRoute.home);
       Get.back(result: true);
     } else {
-      AlertHelper.error("Create permission failed");
+      AlertHelper.error("Create task failed");
     }
     Get.back(result: true);
   }

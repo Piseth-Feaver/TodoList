@@ -9,4 +9,10 @@ class TodayTaskRepository extends BaseRepository {
     return (data).map<TodayTask>((e) => TodayTask.fromJson(e))
         .toList();
   }
+  Future<bool?> updateStatus(UpdateStatus request, int id) async {
+    final response = await put('/tasks/status/${id}', request.toJson());
+    final data = await checkError(response);
+    if (data == null) return null;
+    return true;
+  }
 }

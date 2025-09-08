@@ -21,4 +21,17 @@ class HomeController extends GetxController {
       item.assignAll(tasks);
     }
   }
+  Future<void> updateStatus(TodayTask task) async {
+    final newStatus = task.status == "Completed" ? "Pending" : "Completed";
+    final success = await repo.updateStatus(
+      UpdateStatus(status: newStatus, id: task.id),
+      task.id,
+    );
+    if (success == true) {
+      task.status = newStatus;
+      item.refresh();
+    } else {
+      Get.snackbar("Error", "Failed to update task status");
+    }
+  }
 }

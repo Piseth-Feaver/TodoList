@@ -23,13 +23,8 @@ class HomeView extends GetView<HomeController> {
               overflow: TextOverflow.ellipsis,
               text: TextSpan(
                 children: [
-                  TextSpan(
-                    text: "Welcome, ",
-                    style: Get.textTheme.titleLarge,
-                  ),
-                  TextSpan(
-                    text: controller.username,
-                  ),
+                  TextSpan(text: "Welcome, ", style: Get.textTheme.titleLarge),
+                  TextSpan(text: controller.username, style: Get.textTheme.titleLarge?.copyWith(fontSize: 24)),
                 ],
               ),
             ),
@@ -54,11 +49,7 @@ class HomeView extends GetView<HomeController> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("Progress", style: Get.textTheme.titleLarge),
-                      Text(
-                        "See All",
-                        style: TextStyle(fontSize: 14, color: Colors.blue),
-                      ),
+                      Text("Progress", style: Get.textTheme.titleMedium),
                     ],
                   ),
                   AppCard(
@@ -67,11 +58,7 @@ class HomeView extends GetView<HomeController> {
                       children: [
                         Text("Daily Task", style: Get.textTheme.titleMedium),
                         Text(
-                          "2/3 Task Completed",
-                          style: TextStyle(fontSize: 14),
-                        ),
-                        Text(
-                          "You are almost done go ahead",
+                          "Please complete your task as much as possible",
                           style: TextStyle(fontSize: 12, color: Colors.black),
                         ),
                       ],
@@ -81,11 +68,7 @@ class HomeView extends GetView<HomeController> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("Today's Task", style: Get.textTheme.titleLarge),
-                      Text(
-                        "See All",
-                        style: TextStyle(fontSize: 14, color: Colors.blue),
-                      ),
+                      Text("Tasks", style: Get.textTheme.titleLarge),
                     ],
                   ),
                   SizedBox(height: kSpace),
@@ -100,7 +83,10 @@ class HomeView extends GetView<HomeController> {
                         final i = items[index];
                         return GestureDetector(
                           onTap: () async {
-                            await Get.toNamed(HomeRoute.detail, arguments: i.id,);
+                            await Get.toNamed(
+                              HomeRoute.detail,
+                              arguments: i.id,
+                            );
                             controller.fetchTodayTasks();
                           },
                           child: AppCard(
@@ -119,9 +105,26 @@ class HomeView extends GetView<HomeController> {
                                     Text(formatEndTime(i.endTime)),
                                   ],
                                 ),
-                                // const SizedBox(height: kSpace),
-                                Text("Status: ${i.status}"),
+                                Text(
+                                  "Status: ${i.status}",
+                                  style: TextStyle(
+                                    color:
+                                        i.status == "Completed"
+                                            ? Colors.green
+                                            : Colors.orange,
+                                  ),
+                                ),
                               ],
+                            ),
+                            right: IconButton(
+                              onPressed: () {
+                                controller.updateStatus(i);
+                              },
+                              icon: Icon(
+                                i.status == "Completed"
+                                    ? Icons.check_box
+                                    : Icons.check_box_outline_blank,
+                              ),
                             ),
                           ),
                         );
@@ -137,8 +140,8 @@ class HomeView extends GetView<HomeController> {
           floatingActionButton: FloatingActionButton(
             backgroundColor: buttonColor,
             onPressed: () async {
-                await Get.toNamed(HomeRoute.task);
-                controller.fetchTodayTasks();
+              await Get.toNamed(HomeRoute.task);
+              controller.fetchTodayTasks();
             },
             child: Icon(Icons.add, color: Colors.white),
           ),

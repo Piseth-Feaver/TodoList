@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:todo_list/background.dart';
+import 'package:todo_list/core/color.dart';
 import 'package:todo_list/core/size.dart';
 import 'package:todo_list/helper/button.dart';
 import 'package:todo_list/helper/card.dart';
@@ -108,8 +109,8 @@ class DetailView extends GetView<DetailController> {
                     ),
 
                   );
-
                 }),
+                SizedBox(height: kSpace * 2),
                 AppButton(
                   onPressed: () {
                     final items = controller.item.value;
@@ -121,9 +122,11 @@ class DetailView extends GetView<DetailController> {
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
+                SizedBox(height: kSpace),
                 AppButton(
                   onPressed: () {
                     Get.defaultDialog(
+                      backgroundColor: cardColor,
                       title: "Confirm Delete",
                       middleText: "Are you sure you want to delete this task?",
                       textCancel: "Cancel",

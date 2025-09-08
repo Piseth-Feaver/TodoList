@@ -77,6 +77,7 @@ class EditView extends GetView<EditController> {
                       ),
                     ],
                   ),
+                  SizedBox(height: kSpace * 2,),
                   AppButton(
                     onPressed: () => controller.onUpdate(Get.arguments),
                     child: const Text(
