@@ -11,6 +11,12 @@ class SignInController extends GetxController {
   final formKey = GlobalKey<FormState>();
   final repo = Get.find<SignInRepository>();
   final storage = Get.find<StorageService>();
+@override onInit() {
+  if (storage.token !=  '') {
+    Future.microtask(() => Get.offAllNamed(HomeRoute.home));
+  }
+  super.onInit();
+}
 
   Future<void> signIn() async {
     if (formKey.currentState == null || !formKey.currentState!.validate()) {
