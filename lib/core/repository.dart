@@ -25,7 +25,6 @@ class BaseRepository extends GetConnect {
   @protected
   Future<dynamic> checkError(Response response, {dynamic data}) async {
     if (response.hasError) {
-      // Handle unauthorized → retry
       if ([401, 403].contains(response.statusCode)) {
         if (response.request == null) {
           return Future.error("Cannot retry: original request missing");
@@ -40,8 +39,6 @@ class BaseRepository extends GetConnect {
         );
         return checkError(res);
       }
-
-      // Build error message
       var message = response.statusText ?? "Unknown error";
       if (response.bodyString?.isNotEmpty ?? false) {
         message = response.bodyString!;

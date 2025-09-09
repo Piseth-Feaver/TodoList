@@ -16,12 +16,12 @@ class TaskController extends GetxController {
   var endTime = TimeOfDay.now().obs;
   final repo = Get.find<CreateTaskRepository>();
 
-
   Future<void> createTask() async {
     if (formKey.currentState == null || !formKey.currentState!.validate()) {
       return;
     }
     Get.focusScope?.unfocus();
+
     final request = CreateTaskRequest(
       taskName: nameController.text.trim(),
       description: descriptionController.text.trim(),
@@ -34,13 +34,14 @@ class TaskController extends GetxController {
         startTime.value.minute,
       ),
       endTime: DateTime(
-      selectedDate.value.year,
-      selectedDate.value.month,
-      selectedDate.value.day,
-      endTime.value.hour,
-      endTime.value.minute,
-    ),
+        selectedDate.value.year,
+        selectedDate.value.month,
+        selectedDate.value.day,
+        endTime.value.hour,
+        endTime.value.minute,
+      ),
     );
+
     final result = await repo.createTask(request);
     if (result != null) {
       AlertHelper.success("Create task successfully");
@@ -49,8 +50,9 @@ class TaskController extends GetxController {
     } else {
       AlertHelper.error("Create task failed");
     }
-    Get.back(result: true);
   }
+
+
   bool isSelectedDay(DateTime day) {
     return isSameDay(selectedDate.value, day);
   }

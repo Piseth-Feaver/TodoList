@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:toastification/toastification.dart';
 import 'package:todo_list/route/home.dart';
+
+import 'core/device.dart';
+import 'core/storage.dart';
+
+Future<void> injectServices() async {
+  await GetStorage.init();
+  Get.put(DeviceService());
+  Get.put(StorageService());
+}
 
 class App extends StatelessWidget {
   const App({super.key});

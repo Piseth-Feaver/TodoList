@@ -1,13 +1,11 @@
-import 'package:get/get.dart';
-
 class TodayTask {
-  final int id ;
+  final int id;
   final String name;
   final String date;
   final String description;
   final String startTime;
   final String endTime;
-  String status = "pending";
+  String status;
 
   TodayTask({
     required this.id,
@@ -15,10 +13,10 @@ class TodayTask {
     required this.date,
     required this.description,
     required this.startTime,
-    required this.status,
+    this.status = "pending",
     required this.endTime,
-
   });
+
   factory TodayTask.fromJson(Map<String, dynamic> json) {
     return TodayTask(
       id: json['id'],
@@ -26,11 +24,12 @@ class TodayTask {
       date: json['date'],
       description: json['description'],
       startTime: json['startTime'],
-      status: json['status'],
-      endTime:json['endTime'],
+      status: json['status'] ?? "pending",
+      endTime: json['endTime'],
     );
   }
 }
+
 
 class UpdateStatus{
   final int id;

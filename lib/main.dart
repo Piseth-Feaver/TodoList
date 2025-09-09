@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'export.dart';
 
-void main(){
+void main() async{
+  await injectServices();
   runApp(const App());
 }

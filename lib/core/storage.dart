@@ -59,17 +59,12 @@ class StorageService extends GetxService {
     await _box.write(_userType, value);
   }
   String? get username => _box.read(_username);
+
   Future<void> setUsername(String value) async {
     await _box.write(_username, value);
   }
   String get token => _box.read(_token) ?? '';
-  Future<void> settoken(String value) async {
-    await _box.write(_token, value);
 
-  Future<void> removeUsername(String value) async {
-    await _box.remove(_username);
-  }
-  }
 
   Future<void> setNotificationToken(String token) async {
     await _box.write(_notificationToken, token);

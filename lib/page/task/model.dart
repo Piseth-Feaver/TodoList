@@ -7,12 +7,14 @@ class CreateTaskRequest {
   final DateTime startTime;
   final DateTime endTime;
 
+
   CreateTaskRequest({
     required this.taskName,
     required this.description,
     required this.date,
     required this.startTime,
     required this.endTime,
+
   });
 
   Map<String, dynamic> toJson() {
