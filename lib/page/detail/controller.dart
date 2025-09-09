@@ -9,10 +9,9 @@ import 'repository.dart';
 class DetailController extends GetxController {
   final selectedDate = DateTime.now().obs;
   final focusedDate = DateTime.now().obs;
-  final calendarFormat = CalendarFormat.month.obs;
-  final confirmController = TextEditingController();
   final nameController = TextEditingController();
   final descriptionController = TextEditingController();
+  final calendarFormat = CalendarFormat.month.obs;
   var startTime = TimeOfDay.now().obs;
   var endTime = TimeOfDay.now().obs;
   final item = Rxn<DetailRequest>();
@@ -27,7 +26,7 @@ class DetailController extends GetxController {
   }
 
   Future<void> fetchDetail(int id) async {
-    final tasks = await repo.getFeedBack(taskId);
+    final tasks = await repo.getFeedBack(id);
     if (tasks != null) {
       selectedDate.value = DateTime.parse(tasks.date);
       item.value = tasks;
@@ -53,6 +52,7 @@ class DetailController extends GetxController {
   void onFormatChanged(CalendarFormat format) {
     calendarFormat.value = format;
   }
+
   Future<void> pickStartTime(BuildContext context) async {
     final pickedTime = await showTimePicker(
       context: context,
@@ -62,6 +62,7 @@ class DetailController extends GetxController {
       startTime.value = pickedTime;
     }
   }
+
   Future<void> pickEndTime(BuildContext context) async {
     final pickedTime = await showTimePicker(
       context: context,

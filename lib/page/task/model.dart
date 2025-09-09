@@ -6,7 +6,6 @@ class CreateTaskRequest {
   final DateTime date;
   final DateTime startTime;
   final DateTime endTime;
-  final int userId;
 
   CreateTaskRequest({
     required this.taskName,
@@ -14,7 +13,6 @@ class CreateTaskRequest {
     required this.date,
     required this.startTime,
     required this.endTime,
-    required this.userId,
   });
 
   Map<String, dynamic> toJson() {
@@ -24,7 +22,6 @@ class CreateTaskRequest {
       "date": DateFormat('yyyy-MM-dd').format(date),
       "startTime": DateFormat('HH:mm').format(startTime),
       "endTime": DateFormat('HH:mm').format(endTime),
-      "userId": userId,
     };
   }
 }
@@ -37,6 +34,7 @@ class CreateTaskResponse {
   final String date;
   final String startTime;
   final String endTime;
+  final int userId;
 
   CreateTaskResponse({
     required this.id,
@@ -45,6 +43,7 @@ class CreateTaskResponse {
     required this.date,
     required this.startTime,
     required this.endTime,
+    required this.userId,
   });
 
   factory CreateTaskResponse.fromJson(Map<String, dynamic> json) {
@@ -55,6 +54,7 @@ class CreateTaskResponse {
       date: json['date'],
       startTime: json['startTime'],
       endTime: json['endTime'],
+      userId: json['userId'],
     );
   }
 }

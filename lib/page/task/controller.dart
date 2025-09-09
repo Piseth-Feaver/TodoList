@@ -40,7 +40,6 @@ class TaskController extends GetxController {
       endTime.value.hour,
       endTime.value.minute,
     ),
-      userId: 1,
     );
     final result = await repo.createTask(request);
     if (result != null) {

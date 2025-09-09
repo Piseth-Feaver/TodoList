@@ -23,7 +23,7 @@ class HomeView extends GetView<HomeController> {
               overflow: TextOverflow.ellipsis,
               text: TextSpan(
                 children: [
-                  TextSpan(text: "Welcome, ", style: Get.textTheme.titleLarge),
+                  TextSpan(text: "Welcome,", style: Get.textTheme.titleLarge),
                   TextSpan(text: controller.username, style: Get.textTheme.titleLarge?.copyWith(fontSize: 24)),
                 ],
               ),

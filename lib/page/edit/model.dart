@@ -6,6 +6,7 @@ class EditRequest{
   final String startTime;
   final String endTime;
   final String status;
+  final int userId;
   EditRequest({
     required this.id,
     required this.name,
@@ -14,6 +15,7 @@ class EditRequest{
     required this.startTime,
     required this.endTime,
     required this.status,
+    required this.userId,
   });
   factory EditRequest.fromJson(Map<String, dynamic> json) {
     return EditRequest(
@@ -24,6 +26,7 @@ class EditRequest{
       startTime: json['startTime'],
       endTime: json['endTime'],
       status: json['status'],
+      userId: json['userId'],
     );
   }
 

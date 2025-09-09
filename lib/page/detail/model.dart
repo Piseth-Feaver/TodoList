@@ -6,6 +6,7 @@ class DetailRequest{
   final String date;
   final String endTime;
   final String status;
+  final int userId;
   DetailRequest({
     required this.id,
     required this.name,
@@ -14,6 +15,7 @@ class DetailRequest{
     required this.startTime,
     required this.endTime,
     required this.status,
+    required this.userId,
   });
   factory DetailRequest.fromJson(Map<String, dynamic> json) {
     return DetailRequest(
@@ -24,6 +26,7 @@ class DetailRequest{
       startTime: json['startTime'],
       endTime: json['endTime'],
       status: json['status'],
+      userId: json['userId'],
     );
   }
 

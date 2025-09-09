@@ -15,7 +15,6 @@ class EditController extends GetxController {
   final endTime = TimeOfDay.now().obs;
   final repo = Get.find<EditRepository>();
 
-
   @override
   void onInit() {
     super.onInit();
@@ -73,13 +72,13 @@ class EditController extends GetxController {
   }
 
   Future<void> fetchDetail(int id) async {
-    final tasks = await repo.getFeedBack(id);
-    if (tasks != null) {
-      nameController.text = tasks.name;
-      descriptionController.text = tasks.description;
-      selectedDate.value = DateTime.parse(tasks.date);
-      final start = DateFormat("HH:mm:ss").parse(tasks.startTime);
-      final end = DateFormat("HH:mm:ss").parse(tasks.endTime);
+    final task = await repo.getTaskById(id);
+    if (task != null) {
+      nameController.text = task.name;
+      descriptionController.text = task.description;
+      selectedDate.value = DateTime.parse(task.date);
+      final start = DateFormat("HH:mm:ss").parse(task.startTime);
+      final end = DateFormat("HH:mm:ss").parse(task.endTime);
       startTime.value = TimeOfDay(hour: start.hour, minute: start.minute);
       endTime.value = TimeOfDay(hour: end.hour, minute: end.minute);
     }
